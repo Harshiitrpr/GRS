@@ -1,0 +1,3 @@
+https://github.com/python/cpython
+https://github.com/tensorflow/tensorflow
+https://github.com/magenta/magenta

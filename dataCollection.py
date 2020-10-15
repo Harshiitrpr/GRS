@@ -14,7 +14,7 @@ def screenpos():
     driver.set_window_position(-8,0)
     time.sleep(1)
 
-PATH = "/home/captain/Social Networks/Soical Project/Data Collection/chromedriver"
+PATH = "chromedriver"
 driver = webdriver.Chrome(PATH)
 driver.minimize_window()
 driver.implicitly_wait(1)
