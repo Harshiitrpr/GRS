@@ -1,3 +1,10 @@
 https://github.com/python/cpython
 https://github.com/tensorflow/tensorflow
 https://github.com/magenta/magenta
+https://github.com/twbs/bootstrap
+https://github.com/nodejs/node
+https://github.com/jquery/jquery
+https://github.com/h5bp/html5-boilerplate
+https://github.com/rails/rails
+https://github.com/d3/d3
+https://github.com/impress/impress.js/
