@@ -8,3 +8,12 @@ https://github.com/h5bp/html5-boilerplate
 https://github.com/rails/rails
 https://github.com/d3/d3
 https://github.com/impress/impress.js/
+https://github.com/microsoft/vscode
+https://github.com/MicrosoftDocs/azure-docs
+https://github.com/flutter/flutter
+https://github.com/firstcontributions/first-contributions
+https://github.com/facebook/react-native
+https://github.com/kubernetes/kubernetes
+https://github.com/DefinitelyTyped/DefinitelyTyped
+https://github.com/ansible/ansible
+https://github.com/home-assistant/core
