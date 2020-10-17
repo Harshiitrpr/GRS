@@ -24,15 +24,9 @@ with open("/home/captain/Social Networks/Soical Project/Data Collection/urls.txt
 
 check = 0
 for url in lines:
-    check += 1
-    if(check < 7):
-        continue
-    if(check >= 15):
-        break
     driver = webdriver.Chrome(PATH)
     screenpos()
     driver.implicitly_wait(1)
-    check += 1
     driver.get(url)
     link = driver.find_element_by_css_selector('#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div')
     link = link.find_element_by_partial_link_text('Contributors') #div.BorderGrid-cell > h2.h4 > a[class="link-gray-dark no-underline "]
@@ -51,9 +45,7 @@ for url in lines:
     length = len(num_contributors)
     if(length > 1000):
         length = 1000
-    contributors = []
-    repos = []
-    data = open("data.txt", 'a')
+    data = open("followerdata.txt", 'a')
     for x in range(length): #len(contributor_repos)
         data.write('\n')
         path = '//*[@id="contributors"]/ol/li['+str(x+1)+']/span/h3/a[2]'
@@ -61,23 +53,24 @@ for url in lines:
             contributor = WebDriverWait(driver,100).until(
                 EC.presence_of_element_located((By.XPATH, path)),
             )
-            contributors.append(contributor.text)
             data.write(contributor.text)
             contributor.click()
         except TimeoutException:
             pass
-        user_repos = []
+        user_followers = []
+        find = driver.find_element_by_partial_link_text("follower")
+        find.click()
         try:
-            user_repos = WebDriverWait(driver,50).until(
-                EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div:nth-child(2) > div > div:nth-child(1) > div > ol > li > div > div > div > a > span')),
+            user_followers = WebDriverWait(driver,50).until(
+                EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div:nth-child(2) > div > div > div.d-table-cell.col-9.v-align-top.pr-3 > a > span.f4.link-gray-dark ')),
             )
-            for repo in user_repos:
-                repos.append(repo.text)
-                data.write(" "+repo.text)
+            for repo in user_followers:
+                if(repo.text != ''):
+                    data.write(" "+repo.text)
 
         except TimeoutException:
+            print("Not found")
             pass
-        
         driver.back()
-    check += 1
-    driver.quit()
+        driver.back()
+driver.quit()

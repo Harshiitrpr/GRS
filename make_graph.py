@@ -13,7 +13,7 @@ def Graph_synthesis(G, conn):
                 G.add_edge(conn[i], conn[j])
 
 G = nx.Graph()
-f = open("/home/captain/Social Networks/data.txt")
+f = open("/home/captain/Social Networks/Soical Project/Data Collection/data.txt")
 lines = f.read().splitlines()
 lines.sort()
 nodes = {}
