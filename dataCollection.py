@@ -77,7 +77,7 @@ for url in lines:
 
         except TimeoutException:
             pass
-                  
+        
         driver.back()
     check += 1
     driver.quit()

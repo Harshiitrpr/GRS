@@ -45,7 +45,7 @@ for i in allrepos:
             conn_nodes.append(j)
     
     Graph_synthesis(G, conn_nodes)
-
-nx.draw(G)
+    
 print(len(G.edges()))
+nx.draw(G)
 plt.show()
