@@ -1,4 +1,3 @@
-https://github.com/python/cpython
 https://github.com/tensorflow/tensorflow
 https://github.com/magenta/magenta
 https://github.com/twbs/bootstrap
@@ -17,3 +16,5 @@ https://github.com/kubernetes/kubernetes
 https://github.com/DefinitelyTyped/DefinitelyTyped
 https://github.com/ansible/ansible
 https://github.com/home-assistant/core
+https://github.com/python/cpython
+https://github.com/magenta/magenta
