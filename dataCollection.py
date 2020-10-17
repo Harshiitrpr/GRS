@@ -24,6 +24,11 @@ with open("/home/captain/Social Networks/Soical Project/Data Collection/urls.txt
 
 check = 0
 for url in lines:
+    check += 1
+    if(check < 7):
+        continue
+    if(check >= 15):
+        break
     driver = webdriver.Chrome(PATH)
     screenpos()
     driver.implicitly_wait(1)
@@ -43,10 +48,13 @@ for url in lines:
         EC.presence_of_all_elements_located((By.XPATH, '//*[@id="contributors"]/ol/li/span/h3/a[2]')),
     )
     print(num_contributors)
+    length = len(num_contributors)
+    if(length > 1000):
+        length = 1000
     contributors = []
     repos = []
     data = open("data.txt", 'a')
-    for x in range(len(num_contributors)): #len(contributor_repos)
+    for x in range(length): #len(contributor_repos)
         data.write('\n')
         path = '//*[@id="contributors"]/ol/li['+str(x+1)+']/span/h3/a[2]'
         try:
@@ -71,8 +79,5 @@ for url in lines:
             pass
                   
         driver.back()
-        print(contributors)
-        print(repos)
-    if(check == 1):
-        break
+    check += 1
     driver.quit()
