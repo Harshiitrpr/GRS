@@ -65,7 +65,7 @@ for url in lines:
 
         except TimeoutException:
             pass
-                  
+        
         driver.back()
         print(contributors)
         print(repos)
