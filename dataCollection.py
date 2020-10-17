@@ -16,15 +16,18 @@ def screenpos():
     driver.set_window_position(-8,0)
     time.sleep(1)
 
-PATH = "chromedriver"
+# PATH = "chromedriver"
+PATH = "/home/captain/Social Networks/Soical Project/Data Collection/chromedriver"
 
-with open('urls.txt') as f:
+with open("/home/captain/Social Networks/Soical Project/Data Collection/urls.txt") as f:
     lines = f.read().splitlines() 
 
+check = 0
 for url in lines:
     driver = webdriver.Chrome(PATH)
-    driver.minimize_window()
+    screenpos()
     driver.implicitly_wait(1)
+    check += 1
     driver.get(url)
     link = driver.find_element_by_css_selector('#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div')
     link = link.find_element_by_partial_link_text('Contributors') #div.BorderGrid-cell > h2.h4 > a[class="link-gray-dark no-underline "]
@@ -39,6 +42,7 @@ for url in lines:
     num_contributors = WebDriverWait(driver,100).until(
         EC.presence_of_all_elements_located((By.XPATH, '//*[@id="contributors"]/ol/li/span/h3/a[2]')),
     )
+    print(num_contributors)
     contributors = []
     repos = []
     data = open("data.txt", 'a')
@@ -69,5 +73,6 @@ for url in lines:
         driver.back()
         print(contributors)
         print(repos)
-        time.sleep(3)
+    if(check == 1):
+        break
     driver.quit()

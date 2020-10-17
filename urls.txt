@@ -1,5 +1,5 @@
-https://github.com/tensorflow/tensorflow
 https://github.com/magenta/magenta
+https://github.com/tensorflow/tensorflow
 https://github.com/twbs/bootstrap
 https://github.com/nodejs/node
 https://github.com/jquery/jquery
