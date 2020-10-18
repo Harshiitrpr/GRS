@@ -18,3 +18,13 @@ https://github.com/ansible/ansible
 https://github.com/home-assistant/core
 https://github.com/python/cpython
 https://github.com/magenta/magenta
+https://github.com/home-assistant/home-assistant.io
+https://github.com/freeCodeCamp/freeCodeCamp
+https://github.com/vuejs/vue
+https://github.com/EbookFoundation/free-programming-books
+https://github.com/github/gitignore
+https://github.com/tensorflow/models
+https://github.com/opencv/opencv
+https://github.com/videolan/vlc
+https://github.com/torvalds/linux
+https://github.com/LibreOffice/core
