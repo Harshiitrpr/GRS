@@ -29,3 +29,7 @@ https://github.com/videolan/vlc
 https://github.com/torvalds/linux
 https://github.com/LibreOffice/core
 https://github.com/Homebrew/homebrew-core
+https://github.com/dotnet/corefx
+https://github.com/bitcoin/bitcoin
+https://github.com/dotnet/AspNetCore.Docs
+https://github.com/MicrosoftDocs/windows-itpro-docs
