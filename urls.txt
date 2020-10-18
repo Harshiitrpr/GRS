@@ -33,3 +33,7 @@ https://github.com/dotnet/corefx
 https://github.com/bitcoin/bitcoin
 https://github.com/dotnet/AspNetCore.Docs
 https://github.com/MicrosoftDocs/windows-itpro-docs
+https://github.com/Azure/azure-quickstart-templates
+https://github.com/Azure/azure-sdk-for-net
+https://github.com/Azure/azure-powershell
+https://github.com/Azure/azure-cli
