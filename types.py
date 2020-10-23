@@ -34,7 +34,11 @@ with open("DataCorrect.txt") as f:
             url = "https://github.com/"+user+"/"+repo
             # print(url)
             driver.get(url)
-            link = driver.find_elements_by_css_selector('#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div > div')[-1]
+            link = driver.find_elements_by_css_selector('#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div > div')
+            if(len(link)==0):
+                continue
+            else:
+                link = link[-1]
             # print("link",link)
             languages = link.find_elements_by_css_selector("div > ul > li > a > span.text-gray-dark.text-bold.mr-1")
             percentage = link.find_elements_by_css_selector("div > ul > li > a > span:nth-child(3)")
