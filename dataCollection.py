@@ -36,7 +36,7 @@ for url in lines:
     driver.get(url)
     link = driver.find_element_by_css_selector('#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div')
     link = link.find_element_by_partial_link_text('Contributors') #div.BorderGrid-cell > h2.h4 > a[class="link-gray-dark no-underline "]
-    print(link.text)
+    # print(link.text)
     try:
         repo_contributors = WebDriverWait(driver,6,0.5).until(
             EC.presence_of_element_located((By.LINK_TEXT, link.text)),
@@ -49,8 +49,8 @@ for url in lines:
     )
     
     length = len(num_contributors)
-    if(length > 1000):
-        length = 1000
+    # if(length > 1000):
+    #     length = 1000
     contributors = []
     repos = []
     data = open("data.txt", 'a')

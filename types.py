@@ -5,15 +5,23 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
+from collections import defaultdict
 import time
 import re,getpass,csv
 import datetime
 import random
 
-PATH = "chromedriver"
+
+tokenise = dict()
+token = 1
+to_write = [["Users"]]
+
+PATH = "chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 driver.implicitly_wait(1)
 driver.minimize_window()    
+data = open("languages.txt","a")
+
 
 with open("DataCorrect.txt") as f:
     lines = f.read().splitlines() 
@@ -21,6 +29,7 @@ with open("DataCorrect.txt") as f:
         repos = users.split()
         user = repos[0]
         repos = repos[1:]
+        to_write.append([user] + [0 for i in range(token-1)])
         for repo in repos:
             url = "https://github.com/"+user+"/"+repo
             # print(url)
@@ -34,5 +43,14 @@ with open("DataCorrect.txt") as f:
                 perc = perc[:len(perc)-1]
                 perc = float(perc)
                 if(perc>20):
-                    print(languages[i].text)
-                    # print(languages[i].text)
+                    if languages[i].text not in tokenise:
+                        data.write(languages[i].text + ' ')
+                        tokenise[languages[i].text] = token
+                        token += 1
+                        to_write[0].append(languages[i].text)
+                        for j in range(1,len(to_write)):
+                            to_write[j].append(0)
+                    to_write[-1][tokenise[languages[i].text]] += 1
+        writer = csv.writer(open('lang.csv', 'w'))
+        writer.writerows(to_write)
+        time.sleep(0.5)
