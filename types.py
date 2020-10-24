@@ -36,7 +36,7 @@ with open("DataCorrect.txt") as f:
             # print(url)
             driver.get(url)
             try:
-                link = WebDriverWait(driver,20).until(
+                link = WebDriverWait(driver,100).until(
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div > div')),
                 )
             except TimeoutException:
