@@ -7,7 +7,6 @@ benoitsteiner pytorch Halide x86_kernels misc onnx tensorflow-xsmm tensorflow te
 sanjoy tensorflow docs playingwithpointers.com llvm-tutorial-code impossible-programs abseil-cpp community auto-clustering-presentation alive theoretical-minimum Me clang-rewriter echoes llvm Snippets mod ray comdat-ipo AIMA strongtalk hLLVM bfjit llvm-scripts resume llvm-late-safepoint-placement clayoven MetaprogAgda thesis wattage klug.github.com
 hawkinsp jax numpyro opt_einsum flax numpy legion pybind11 tensorflow ZTopo hawkinsp.github.com
 caisq tfjs-examples-1 tfjs-dump tfjs-models tensorboard punt37 tfjs-1 caisq.github.io tf-dump community tfjs-layers-1 tfjs-converter-1 deeplearnjs tfjs-node teachablemachine-libraries datasets NeuroEvolution-Vehicles chrome-extension-typescript-starter keras tfjs-website-1 tfjs-data-1 onnxjs tfjs-vis tensorflow electron-quick-start training-data-analyst propel nmt audapter_matlab models spectrogram.js
-jpienaartensorflower-gardener
 yongtang io tensorflow demo sampleproject python_example llvm-project soc librdkafka community graph tensorflow-feedstock filament docker hadoop-xz clamav.js keras kubernetes swarmkit libnetwork clamav4j
 gunan songserver protobuf tensorflow subprocess pipe bazel_test community docs abseil-cpp dso_bench tensorflow-docker
 mrry onnxruntime mrry.github.io tensorflow models magenta docs cloudml-samples gemmlowp TensorBox FluidNet ngraph protobuf murbauer grpc application-materials ciel ciel-skywriting ciel-java ciel-c tweethisometer skywriting
