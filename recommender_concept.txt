@@ -1,0 +1,24 @@
+Point 1 :-
+Basic principle is to group people who contribute to similar projects or based on interests?
+Can we do this based on followers data. Look one follows another person only if one likes his/her
+work and contributions. So this will be wise to use followers data to group people.
+
+Point 2 :- 
+Suppose our above model predicts that person A and person B are similar and person A has contributed
+in repo X then we can recommend person B too to contribute in that repo. We can also write like
+See this person whom you follow has also contributed in the same project so you should too.
+
+Point 3 :-
+We can maintain a set of popular repos also which we will recommend to all users who has interest in
+that topic.
+
+Point 4 :-
+See we can have a set of repos which are quite famous and we can think of a concept like if two 
+have contributors have contributed in any of such repos then they must be grouped toegther.
+Kind of bias we are doing.
+
+Point 5 :-
+We can also maintain an array corresponding to all new topics like python, javascript, 
+javascript open source frameworks like angular, vue.js, node.js, algorithms and many more and corresponding
+to each user fill this array regarding how many repos has he currently contributed in. 
+This can prove to be very helpful to group people based on similar concept.
