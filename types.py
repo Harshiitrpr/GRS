@@ -34,7 +34,13 @@ with open("DataCorrect.txt") as f:
             url = "https://github.com/"+user+"/"+repo
             # print(url)
             driver.get(url)
-            link = driver.find_elements_by_css_selector('#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div > div')
+            try:
+                link = WebDriverWait(driver,20).until(
+                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div > div')),
+                )
+            except TimeoutException:
+                pass
+
             if(len(link)==0):
                 continue
             else:
