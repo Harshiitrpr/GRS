@@ -13,14 +13,15 @@ import random
 
 
 tokenise = dict()
-token = 1
-to_write = [["Users"]]
+token = 2
+to_write = [["Users", "Repo"]]
 
 PATH = "chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 driver.implicitly_wait(1)
 driver.minimize_window()    
 data = open("languages.txt","a")
+followup = open("missed_users.txt",'w')
 
 
 with open("DataCorrect.txt") as f:
@@ -29,8 +30,8 @@ with open("DataCorrect.txt") as f:
         repos = users.split()
         user = repos[0]
         repos = repos[1:]
-        to_write.append([user] + [0 for i in range(token-1)])
         for repo in repos:
+            to_write.append([user, repo] + [0 for i in range(token-2)])
             url = "https://github.com/"+user+"/"+repo
             # print(url)
             driver.get(url)
@@ -39,7 +40,8 @@ with open("DataCorrect.txt") as f:
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div > div')),
                 )
             except TimeoutException:
-                pass
+                followup.write(user + ' ' + repo + '\n')
+                continue
 
             if(len(link)==0):
                 continue
@@ -52,7 +54,7 @@ with open("DataCorrect.txt") as f:
                 perc = percentage[i].text
                 perc = perc[:len(perc)-1]
                 perc = float(perc)
-                if(perc>20):
+                if(perc>15):
                     if languages[i].text not in tokenise:
                         data.write(languages[i].text + ' ')
                         tokenise[languages[i].text] = token
@@ -61,6 +63,6 @@ with open("DataCorrect.txt") as f:
                         for j in range(1,len(to_write)):
                             to_write[j].append(0)
                     to_write[-1][tokenise[languages[i].text]] += 1
-        writer = csv.writer(open('lang.csv', 'w'))
-        writer.writerows(to_write)
+            writer = csv.writer(open('lang.csv', 'w'))
+            writer.writerows(to_write)
         time.sleep(0.5)
