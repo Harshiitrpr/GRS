@@ -23,7 +23,7 @@ driver.minimize_window()
 data = open("languages.txt","a")
 followup = open("missed_users.txt",'w')
 
-
+check = 0
 with open("DataCorrect.txt") as f:
     lines = f.read().splitlines() 
     for users in lines:
@@ -65,4 +65,6 @@ with open("DataCorrect.txt") as f:
                     to_write[-1][tokenise[languages[i].text]] += 1
             writer = csv.writer(open('lang.csv', 'w'))
             writer.writerows(to_write)
+            check += 1
+            print(check)
         time.sleep(0.5)
