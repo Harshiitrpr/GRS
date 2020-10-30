@@ -12,8 +12,6 @@ import datetime
 import random
 from collections import defaultdict
 
-def def_value(): 
-    return 0
 tokenise = dict()
 
 file1 = open("/home/captain/Social Project/languages.txt", 'r')
@@ -93,7 +91,7 @@ with open("/home/captain/Social Project/GRS/DataCorrect.txt") as f:
             writer.writerow(to_write[-1])
         fileforuser.write(user)
         if(len(userRepoType) > 0):
-            d = defaultdict(def_value)
+            d = defaultdict(int)
             for x in range(len(userRepoType)):
                 d[userRepoType[x]] += 1
             for key, value in d.items():
