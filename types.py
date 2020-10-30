@@ -17,16 +17,15 @@ token = 2
 to_write = [["Users", "Repo"]]
 
 PATH = "chromedriver.exe"
-driver = webdriver.Chrome(PATH)
-driver.implicitly_wait(1)
-driver.minimize_window()    
-data = open("languages.txt","a")
+data = open("languages.txt","w")
 followup = open("missed_users.txt",'w')
 
 check = 0
 with open("DataCorrect.txt") as f:
     lines = f.read().splitlines() 
     for users in lines:
+        driver = webdriver.Chrome(PATH)
+        driver.implicitly_wait(1)
         repos = users.split()
         user = repos[0]
         repos = repos[1:]
@@ -67,4 +66,4 @@ with open("DataCorrect.txt") as f:
             writer.writerows(to_write)
             check += 1
             print(check)
-        time.sleep(0.5)
+        driver.quit()
