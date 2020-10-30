@@ -12,8 +12,6 @@ import datetime
 import random
 from collections import defaultdict
 
-def def_value(): 
-    return 0
 tokenise = dict()
 
 file1 = open("/home/captain/Social Project/languages.txt", 'r')
@@ -24,41 +22,46 @@ for i in lines:
     x = i.split(' ')
     if(len(x) == 2):
         tokenise[x[0]] = int(x[1])
-        token = int(x[1])
-    elif(len(x) == 3):
-        tokenise[x[0] + ' ' +x[1]] = int(x[2])
-        token = int(x[2])
     else:
-        tokenise[x[0] + ' ' + x[1] + ' ' + x[2]] = int(x[3])
-        token = int(x[3])
-token += 1
-to_write = []
-writer = csv.writer(open('lang.csv', 'a'))
+        tokenise[x[0] + ' ' +x[1]] = int(x[2])
 # PATH = "chromedriver.exe"
 PATH = "/home/captain/Social Project/GRS/chromedriver"
 driver = webdriver.Chrome(PATH)
 driver.implicitly_wait(1)
-driver.minimize_window()    
-data = open("languages.txt","a")
-fileforuser = open("userRepoTypeInfo.txt", "a")
+driver.minimize_window()
+recommendation = open("Recommended-repos.txt", 'a')
 
-
-check = 0
-with open("/home/captain/Social Project/GRS/DataCorrect.txt") as f:
+with open("/home/captain/Social Project/GRS/userFollowingData.txt") as f:
     lines = f.read().splitlines() 
-    for users in lines:
-        repos = users.split()
-        user = repos[0]
-        repos = repos[1:]
-        userRepoType = []
-        if(user == 'vidavakil'):
-            check = 1
-        if(check == 0):
-            continue
-        for repo in repos:
-            to_write.append([user, repo])
+
+with open("/home/captain/Social Project/GRS/userRepoTypeInfo.txt") as fg:
+    user_repo_pasand = fg.read().splitlines() 
+
+for counter in range(len(lines)):
+    users = lines[counter]
+    followings = users.split()
+    user = followings[0]
+    following = followings[1:]
+    userRepoType = []
+    user_pasand = user_repo_pasand[counter].split(' ')
+    user_pasand = user_pasand[1:]
+    for c in range(len(user_pasand)):
+        user_pasand[c] = int(user_pasand[c].split('-')[0])
+    for candidate in following:
+        recommendation.write(user + ' ' + candidate)
+        path = "https://github.com/"+candidate+"?tab=repositories"
+        driver.minimize_window()
+        driver.implicitly_wait(1)
+        driver.get(path)
+        try:
+            candidate_repos = WebDriverWait(driver,5).until(
+                EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#user-repositories-list > ul > li > div.col-10.col-lg-9.d-inline-block > div.d-inline-block.mb-1 > h3 > a')),
+            )
+
+        except TimeoutException:
+            pass
+        for repo in candidate_repos: 
             url = "https://github.com/"+user+"/"+repo
-            # print(url)
             driver.get(url)
             try:
                 link = WebDriverWait(driver,100).until(
@@ -82,20 +85,7 @@ with open("/home/captain/Social Project/GRS/DataCorrect.txt") as f:
                 perc = perc[:len(perc)-1]
                 perc = float(perc)
                 if(perc>=15):
-                    if languages[i].text not in tokenise:
-                        data.write(languages[i].text + ' ' + str(token) + '\n')
-                        tokenise[languages[i].text] = token
-                        token += 1
-                    to_write[-1].append(tokenise[languages[i].text])
-                    userRepoType.append(tokenise[languages[i].text])
-            writer.writerow(to_write[-1])
-        fileforuser.write(user)
-        if(len(userRepoType) > 0):
-            d = defaultdict(def_value)
-            for x in range(len(userRepoType)):
-                d[userRepoType[x]] += 1
-            for key, value in d.items():
-                fileforuser.write(' ' + str(key) + '-' + str(value))
-        fileforuser.write('\n')
-        time.sleep(0.5)
-    
+                    if(tokenise[languages[i].text] in user_pasand):
+                        recommendation.write(' ' + repo)
+        recommendation.write('\n')
+

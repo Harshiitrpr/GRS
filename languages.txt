@@ -1,0 +1,191 @@
+C++ 2
+Python 3
+Jupyter Notebook 4
+LLVM 5
+C 6
+Starlark 7
+Shell 8
+Go 9
+Java 10
+JavaScript 11
+HTML 12
+C# 13
+Lua 14
+CSS 15
+MLIR 16
+PureBasic 17
+TeX 18
+Emacs Lisp 19
+Haskell 20
+Makefile 21
+Agda 22
+Ruby 23
+SCSS 24
+TypeScript 25
+MATLAB 26
+Scheme 27
+Dart 28
+Cuda 29
+Scala 30
+Objective-C 31
+Clojure 32
+Swift 33
+Perl 34
+Dockerfile 35
+Vim script 36
+OCaml 37
+SMT 38
+Smarty 39
+Jsonnet 40
+Assembly 41
+Rust 42
+GLSL 43
+Vim Snippet 44
+YARA 45
+PHP 46
+PowerShell 47
+Groovy 48
+Fortran 49
+Logos 50
+COBOL 51
+AutoHotkey 52
+NASL 53
+RobotFramework 54
+Objective-C++ 55
+Solidity 56
+Yacc 57
+R 58
+Nix 59
+CMake 60
+Gherkin 61
+Tcl 62
+Verilog 63
+ActionScript 64
+X10 65
+Ada 66
+Batchfile 67
+Protocol Buffer 68
+Standard ML 69
+CoffeeScript 70
+Max 71
+LilyPond 72
+Hack 73
+DIGITAL Command Language 74
+SuperCollider 75
+SRecode Template 76
+Processing 77
+ApacheConf 78
+Kotlin 79
+Brainfuck 80
+Julia 81
+ZIL 82
+OpenEdge ABL 83
+Common Lisp 84
+Vue 85
+Nginx 86
+Mako 87
+Prolog 88
+XSLT 89
+Roff 90
+PostScript 91
+D 92
+FreeMarker 93
+xBase 94
+Racket 95
+Slim 96
+TSQL 97
+SQLPL 98
+Modelica 99
+WebAssembly 100
+F# 101
+VCL 102
+Open Policy Agent 103
+Puppet 104
+Rich Text Format 105
+AutoIt 106
+Handlebars 107
+Elixir 108
+GDScript 109
+DTrace 110
+Pug 111
+Stylus 112
+Haxe 113
+PLpgSQL 114
+Liquid 115
+Markdown 116
+HCL 117
+Macaulay2 118
+Less 119
+Coq 120
+Svelte 121
+Awk 122
+Sass 123
+Visual Basic .NET 124
+Crystal 125
+PureScript 126
+Pascal 127
+Erlang 128
+QML 129
+Mask 130
+ShaderLab 131
+GCC Machine Description 132
+HLSL 133
+VHDL 134
+AppleScript 135
+Mathematica 136
+OpenSCAD 137
+SaltStack 138
+PLSQL 139
+GAP 140
+G-code 141
+YASnippet 142
+Haml 143
+Thrift 144
+Elm 145
+SystemVerilog 146
+CartoCSS 147
+TLA 148
+LookML 149
+nesC 150
+Reason 151
+XS 152
+Squirrel 153
+NSIS 154
+CLIPS 155
+API Blueprint 156
+LiveScript 157
+Classic ASP 158
+Jasmin 159
+ANTLR 160
+Inno Setup 161
+ObjectScript 162
+V 163
+M4 164
+JSON 165
+ASP.NET 166
+Scilab 167
+Eiffel 168
+PigLatin 169
+Pure Data 170
+ColdFusion 171
+Factor 172
+LabVIEW 173
+Smalltalk 174
+CodeQL 175
+Twig 176
+Monkey 177
+VBScript 178
+Papyrus 179
+Nim 180
+Hy 181
+Raku 182
+ZenScript 183
+BitBake 184
+Brightscript 185
+Zig 186
+RAML 187
+Lean 188
+Lex 189
+SWIG 190
+Eagle 191
+RPC 192
