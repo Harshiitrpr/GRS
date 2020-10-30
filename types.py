@@ -10,18 +10,41 @@ import time
 import re,getpass,csv
 import datetime
 import random
+from collections import defaultdict
 
-
+def def_value(): 
+    return 0
 tokenise = dict()
-token = 2
-to_write = [["Users", "Repo"]]
 
-PATH = "chromedriver.exe"
-data = open("languages.txt","w")
-followup = open("missed_users.txt",'w')
+file1 = open("/home/captain/Social Project/languages.txt", 'r')
+lines = file1.read().splitlines()
+
+token = 0
+for i in lines:
+    x = i.split(' ')
+    if(len(x) == 2):
+        tokenise[x[0]] = int(x[1])
+        token = int(x[1])
+    elif(len(x) == 3):
+        tokenise[x[0] + ' ' +x[1]] = int(x[2])
+        token = int(x[2])
+    else:
+        tokenise[x[0] + ' ' + x[1] + ' ' + x[2]] = int(x[3])
+        token = int(x[3])
+token += 1
+to_write = []
+writer = csv.writer(open('lang.csv', 'a'))
+# PATH = "chromedriver.exe"
+PATH = "/home/captain/Social Project/GRS/chromedriver"
+driver = webdriver.Chrome(PATH)
+driver.implicitly_wait(1)
+driver.minimize_window()    
+data = open("languages.txt","a")
+fileforuser = open("userRepoTypeInfo.txt", "a")
+
 
 check = 0
-with open("DataCorrect.txt") as f:
+with open("/home/captain/Social Project/GRS/DataCorrect.txt") as f:
     lines = f.read().splitlines() 
     for users in lines:
         driver = webdriver.Chrome(PATH)
@@ -29,8 +52,13 @@ with open("DataCorrect.txt") as f:
         repos = users.split()
         user = repos[0]
         repos = repos[1:]
+        userRepoType = []
+        if(user == 'vidavakil'):
+            check = 1
+        if(check == 0):
+            continue
         for repo in repos:
-            to_write.append([user, repo] + [0 for i in range(token-2)])
+            to_write.append([user, repo])
             url = "https://github.com/"+user+"/"+repo
             # print(url)
             driver.get(url)
@@ -39,7 +67,6 @@ with open("DataCorrect.txt") as f:
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div > div')),
                 )
             except TimeoutException:
-                followup.write(user + ' ' + repo + '\n')
                 continue
 
             if(len(link)==0):
@@ -47,23 +74,30 @@ with open("DataCorrect.txt") as f:
             else:
                 link = link[-1]
             # print("link",link)
-            languages = link.find_elements_by_css_selector("div > ul > li > a > span.text-gray-dark.text-bold.mr-1")
-            percentage = link.find_elements_by_css_selector("div > ul > li > a > span:nth-child(3)")
+            try:
+                languages = link.find_elements_by_css_selector("div > ul > li > a > span.text-gray-dark.text-bold.mr-1")
+                percentage = link.find_elements_by_css_selector("div > ul > li > a > span:nth-child(3)")
+            except:
+                continue
             for i in range(len(percentage)):
                 perc = percentage[i].text
                 perc = perc[:len(perc)-1]
                 perc = float(perc)
-                if(perc>15):
+                if(perc>=15):
                     if languages[i].text not in tokenise:
-                        data.write(languages[i].text + ' ')
+                        data.write(languages[i].text + ' ' + str(token) + '\n')
                         tokenise[languages[i].text] = token
                         token += 1
-                        to_write[0].append(languages[i].text)
-                        for j in range(1,len(to_write)):
-                            to_write[j].append(0)
-                    to_write[-1][tokenise[languages[i].text]] += 1
-            writer = csv.writer(open('lang.csv', 'w'))
-            writer.writerows(to_write)
-            check += 1
-            print(check)
-        driver.quit()
+                    to_write[-1].append(tokenise[languages[i].text])
+                    userRepoType.append(tokenise[languages[i].text])
+            writer.writerow(to_write[-1])
+        fileforuser.write(user)
+        if(len(userRepoType) > 0):
+            d = defaultdict(def_value)
+            for x in range(len(userRepoType)):
+                d[userRepoType[x]] += 1
+            for key, value in d.items():
+                fileforuser.write(' ' + str(key) + '-' + str(value))
+        fileforuser.write('\n')
+        time.sleep(0.5)
+    
