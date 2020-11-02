@@ -1,0 +1,27 @@
+{% extends "recommender/base.html" %}
+
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'recommender/styles.css' %}">
+
+{% endblock head %}
+
+{% block content %}
+
+<div class="home d-flex p-2 bd-highlight justify-content-center align-items-center">
+    <h1 class="heading">Github<br>Recommender<br>System</h1>
+
+    <div class="card userSearch" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Enter Your Username:</h5>
+            <form action="/userEntered" method="GET">
+                <input type="text">
+                <button type="submit" class="btn btn-success btn-lg btn-block">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
