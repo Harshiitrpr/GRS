@@ -1,4 +1,11 @@
+body {
+    background-color: #e1e4e8;
+}
+
 nav.navbar {
     background-color: #24292e;
-    color: cornsilk !important;
+}
+
+a {
+    color: white;
 }
