@@ -14,7 +14,7 @@ from collections import defaultdict
 
 tokenise = dict()
 
-file1 = open("/home/captain/Social Project/languages.txt", 'r')
+file1 = open("/home/captain/GRS/languages.txt", 'r')
 lines = file1.read().splitlines()
 
 token = 0
@@ -22,19 +22,24 @@ for i in lines:
     x = i.split(' ')
     if(len(x) == 2):
         tokenise[x[0]] = int(x[1])
-    else:
+        token = int(x[1])
+    elif(len(x) == 3):
         tokenise[x[0] + ' ' +x[1]] = int(x[2])
+        token = int(x[2])
+    else:
+        tokenise[x[0] + ' ' + x[1] + ' ' + x[2]] = int(x[3])
+        token = int(x[3])
 # PATH = "chromedriver.exe"
-PATH = "/home/captain/Social Project/GRS/chromedriver"
+PATH = "/home/captain/GRS/chromedriver"
 driver = webdriver.Chrome(PATH)
 driver.implicitly_wait(1)
 driver.minimize_window()
-recommendation = open("Recommended-repos.txt", 'a')
+recommendationx = open("Recommended-repos.txt", 'a')
 
-with open("/home/captain/Social Project/GRS/userFollowingData.txt") as f:
+with open("/home/captain/GRS/userFollowingData.txt") as f:
     lines = f.read().splitlines() 
 
-with open("/home/captain/Social Project/GRS/userRepoTypeInfo.txt") as fg:
+with open("/home/captain/GRS/userRepoTypeInfo.txt") as fg:
     user_repo_pasand = fg.read().splitlines() 
 
 for counter in range(len(lines)):
@@ -45,10 +50,15 @@ for counter in range(len(lines)):
     userRepoType = []
     user_pasand = user_repo_pasand[counter].split(' ')
     user_pasand = user_pasand[1:]
+    user_pasand_num=[]
+    user_pasand_type=[]
     for c in range(len(user_pasand)):
-        user_pasand[c] = int(user_pasand[c].split('-')[0])
+        user_pasand_num.append(int(user_pasand[c].split('-')[1]))
+        user_pasand_type.append(int(user_pasand[c].split('-')[0]))
+    if(len(following)==0):
+        recommendationx.write(user+'\n')
     for candidate in following:
-        recommendation.write(user + ' ' + candidate)
+        recommendationx.write(user + ' ' + candidate)
         path = "https://github.com/"+candidate+"?tab=repositories"
         driver.minimize_window()
         driver.implicitly_wait(1)
@@ -60,9 +70,17 @@ for counter in range(len(lines)):
 
         except TimeoutException:
             pass
-        for repo in candidate_repos: 
-            url = "https://github.com/"+user+"/"+repo
-            driver.get(url)
+        repos=[]
+        for repo in candidate_repos:
+            repos.append(repo.text)
+        for repo in repos: 
+            name_repo=repo
+            url = "https://github.com/"+candidate+"/"+name_repo
+            try:
+                driver.get(url)
+            except:
+                continue
+            print(name_repo)
             try:
                 link = WebDriverWait(driver,100).until(
                     EC.presence_of_all_elements_located((By.CSS_SELECTOR, '#js-repo-pjax-container > div.container-xl.clearfix.new-discussion-timeline.px-3.px-md-4.px-lg-5 > div > div.gutter-condensed.gutter-lg.flex-column.flex-md-row.d-flex > div.flex-shrink-0.col-12.col-md-3 > div > div')),
@@ -85,7 +103,9 @@ for counter in range(len(lines)):
                 perc = perc[:len(perc)-1]
                 perc = float(perc)
                 if(perc>=15):
-                    if(tokenise[languages[i].text] in user_pasand):
-                        recommendation.write(' ' + repo)
-        recommendation.write('\n')
+                    if(languages[i].text in tokenise):
+                        if(tokenise[languages[i].text] in user_pasand_type):
+                            recommendationx.write(' ' + name_repo + '-' + str(user_pasand_num[user_pasand_type.index(tokenise[languages[i].text])]))
+            time.sleep(0.5)
+        recommendationx.write('\n')
 
