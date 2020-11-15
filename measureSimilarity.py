@@ -4,7 +4,7 @@ with open("userRepoTypeInfo.txt") as f:
 anss = []
 iter = 0
 
-val = open("values.txt", 'a')
+val = open("values3.txt", 'a')
 
 for User1 in users:
     for User2 in users:
@@ -49,9 +49,8 @@ for User1 in users:
                 else:
                     ans+=float(lang2_num[ind])/lang1_num[i]
     
-        ans = int(ans)
+        ans = round(ans, 4)
         val.write(str(ans)+" ")
-        print("ans:",ans)
         anss.append(ans)
         iter+=1
         print("iter:",iter)
