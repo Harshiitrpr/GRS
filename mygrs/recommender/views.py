@@ -15,6 +15,7 @@ def about(request):
     return render(request, 'recommender/about.html')
 
 def userEntered(request):
+    print(User_Repo_Type_Contribution)
     return render(request, 'recommender/userEntered.html')
 
 def follow(request):
