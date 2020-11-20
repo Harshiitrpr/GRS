@@ -14,20 +14,9 @@ def home(request):
 def about(request):
     return render(request, 'recommender/about.html')
 
-def userEntered(request, name):
-    repos=User_Repo_Type_Contribution.objects.filter(username=name)
-    if(len(repos)>0):
-        file_sent=[]
-        count=0
-        for x in repos:
-            file_sent.append([x.repo.lang_name, x.contribution_count])
-            count+=x.contribution_count
-        file_sent=sorted(file_sent, key=lambda x: x[1], reverse=True)
-        file_sent=[[x[0], round(float(x[1])/count*100, 2)] for x in file_sent]
-        file_sent=json.dumps(file_sent)
-    else:
-        file_sent='Error'
-    return render(request, 'recommender/userEntered.html', {'userdata':file_sent})
+def userEntered(request):
+    print(User_Repo_Type_Contribution)
+    return render(request, 'recommender/userEntered.html')
 
 def follow(request):
     return render(request, 'recommender/follow.html')

@@ -9,3 +9,17 @@ nav.navbar {
 a {
     color: white;
 }
+
+h1.heading {
+    font-family: 'Alatsi', sans-serif;
+    text-align: center;
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-left: 1%;
+}
+
+.card {
+    margin-right: 1%;
+    margin-left: 1%;
+    margin-top: 1%;
+}

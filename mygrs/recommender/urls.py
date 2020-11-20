@@ -6,4 +6,6 @@ urlpatterns = [
     path('about/', views.about, name = 'recommender-about'),
     path('userEntered/<name>/', views.userEntered, name = 'entered-user'),
     path('follow/', views.follow, name = 'user-follow'),
+    path('recommendedrepos/', views.recommendedRepos, name = 'recommended-repos'),
+    path('recommendedfollowers/', views.recommendedFollowers, name = 'recommended-followers'),
 ]
