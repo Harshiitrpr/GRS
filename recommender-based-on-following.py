@@ -14,7 +14,7 @@ from collections import defaultdict
 
 tokenise = dict()
 
-file1 = open("/home/captain/GRS/languages.txt", 'r')
+file1 = open("languages.txt", 'r')
 lines = file1.read().splitlines()
 
 token = 0
@@ -30,16 +30,16 @@ for i in lines:
         tokenise[x[0] + ' ' + x[1] + ' ' + x[2]] = int(x[3])
         token = int(x[3])
 # PATH = "chromedriver.exe"
-PATH = "/home/captain/GRS/chromedriver"
+PATH = "chromedriver"
 driver = webdriver.Chrome(PATH)
 driver.implicitly_wait(1)
 driver.minimize_window()
 recommendationx = open("Recommended-repos.txt", 'a')
 
-with open("/home/captain/GRS/userFollowingData.txt") as f:
+with open("userFollowingData.txt") as f:
     lines = f.read().splitlines() 
 
-with open("/home/captain/GRS/userRepoTypeInfo.txt") as fg:
+with open("userRepoTypeInfo.txt") as fg:
     user_repo_pasand = fg.read().splitlines() 
 
 for counter in range(len(lines)):
