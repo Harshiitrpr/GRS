@@ -1,10 +1,14 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import GithubUsers, Languages, User_Repo_Type_Contribution, RepoTypes, Users_Repos, Following
 import csv
 import json
 
 def home(request):
+    if(request.method == 'POST'):
+        username = request.POST.get('username')
+        print(username)
+        return redirect('entered-user', username)
     return render(request, 'recommender/home.html')
 
 def about(request):

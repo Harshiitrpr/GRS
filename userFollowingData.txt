@@ -6,7 +6,7 @@ River707
 benoitsteiner
 sanjoy atrick JosephTremoulet russellhadley mlite MatzeB dberlin lic9 abhishek-kakkar giltene cartazio kputnam ScriptDevil yuvipanda manuel gsathya sa1 pankaj28843 crodjer angad schatten yeban skyronic espindola artagnon NOLFXceptMe
 hawkinsp
-caisq jasonmayes satra decentralion lina128 Windfarer baileydesign dsagal alexcrichton lutzroeder chenqing asimshankar rajatmonga syt123450 fly51fly smoothsaling fs-eire gvanrossum shekit reighlan huan ry tafsiri mpushkarna pluskid jart random-forests mdanatg ppwwyyxx shanqing-cai sb2nov MarkDaoust jekbradbury m3bm3b Yangqing goodfeli chihuahua fchollet jhseu drpngx ilblackdragon yifeif gunan martinwicke terrytangyuan yuanbyu
+caisq jasonmayes satra decentralion lina128 Windfarer baileydesign dsagal alexcrichton lutzroeder chenqing rajatmonga syt123450 fly51fly smoothsaling fs-eire gvanrossum shekit reighlan huan ry tafsiri mpushkarna pluskid jart random-forests mdanatg ppwwyyxx shanqing-cai sb2nov MarkDaoust jekbradbury m3bm3b Yangqing goodfeli chihuahua fchollet jhseu drpngx ilblackdragon yifeif gunan martinwicke terrytangyuan yuanbyu
 yongtang
 gunan
 mrry prb12 smowton bcully ms705 sos22 avsm

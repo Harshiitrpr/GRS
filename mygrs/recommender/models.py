@@ -57,5 +57,28 @@ class Following(models.Model):
     def __str__(self):
         return str(self.githubuser)
 
+class recommendedreposSimilarity(models.Model):
+    user = models.CharField(max_length=100)
+    reponame = models.CharField(max_length=100)
+    similaruser = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = 'ReposBasedonSimilarity'
+    
+    def __str__(self):
+        return str(self.user)
+
+class recommendedreposFollowing(models.Model):
+    user = models.CharField(max_length=100)
+    reponame = models.CharField(max_length=100)
+    similaruser = models.CharField(max_length=100)
+    repotype = models.ForeignKey(Languages, on_delete=models.CASCADE, related_name='repotype')
+
+    class Meta:
+        verbose_name_plural = 'ReposBasedonFollowing'
+    
+    def __str__(self):
+        return str(self.user)
+
 
 
