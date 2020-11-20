@@ -10,6 +10,12 @@ def home(request):
 def about(request):
     return render(request, 'recommender/about.html')
 
+def recommendedRepos(request):
+    return render(request, 'recommender/recommendedRepos.html')
+
+def recommendedFollowers(request):
+    return render(request, 'recommender/recommendedFollowers.html')
+
 def userEntered(request, name):
     repos=User_Repo_Type_Contribution.objects.filter(username=name)
     if(len(repos)>0):
