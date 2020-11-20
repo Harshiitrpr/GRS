@@ -1,0 +1,29 @@
+{% extends "recommender/base.html" %}
+
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'recommender/rest.css' %}">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Alatsi&display=swap" rel="stylesheet">
+
+{% endblock head %}
+
+{% block content %}
+
+<h1 class="heading">Repositories Recommended</h1>
+
+<div class="card">
+    <div class="card-header">
+        Quote
+    </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        </blockquote>
+    </div>
+</div>
+
+
+{% endblock content %}

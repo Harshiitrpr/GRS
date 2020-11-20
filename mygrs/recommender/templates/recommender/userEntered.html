@@ -5,6 +5,7 @@
 {% block head %}
 
 <link rel="stylesheet" href="{% static 'recommender/rest.css' %}">
+<<<<<<< HEAD
 <script>
     window.onload = function() {
     
@@ -30,10 +31,74 @@
     chart.render();
     }
 </script>
+=======
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+>>>>>>> b26fe18211a20211e75cdb018ca25cb4a7f1a8a3
 {% endblock head %}
 {% block content %}
+<<<<<<< HEAD
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 entered user
+=======
+
+<div id="chartContainer" style="height: 570px; width: 100%; background-color: #000 important;"></div>
+<script>
+    var datax=JSON.parse("{{userdata|escapejs}}");
+    if(datax!="Error"){
+
+        dps=[];
+        console.log(datax)
+        for(var i=0;i<datax.length;i+=1){
+            a=datax[i][0]; b=datax[i][1];
+            if(i==0){
+                dps.push({
+                    y:b, name:a, exploded:true
+                });
+            }
+            else{
+                dps.push({
+                    y:b, name:a
+                });
+            }
+        }
+        console.log(dps)
+        window.onload = function () {
+            
+        var chart = new CanvasJS.Chart("chartContainer", {
+            exportEnabled: true,
+            animationEnabled: true,
+            title:{
+                text: "Language distribution of the Github User"
+            },
+            legend:{
+                cursor: "pointer",
+                itemclick: explodePie
+            },
+            data: [{
+                type: "pie",
+                showInLegend: true,
+                toolTipContent: "{name}: <strong>{y}%</strong>",
+                indexLabel: "{name} {y}%",
+                dataPoints: dps
+            }]
+        });
+        chart.render();
+        }
+        
+        function explodePie (e) {
+            if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+            } else {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+            }
+            e.chart.render();
+        
+        }
+    }
+</script>
+>>>>>>> b26fe18211a20211e75cdb018ca25cb4a7f1a8a3
 
 {% endblock content %}
