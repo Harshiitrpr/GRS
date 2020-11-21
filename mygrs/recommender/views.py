@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import GithubUsers, Languages, User_Repo_Type_Contribution, RepoTypes, Users_Repos, Following, recommendedreposfollowing, recommendedrepossimilarity, recommendedfollowing
+from .models import GithubUsers, Languages, User_Repo_Type_Contribution, RepoTypes, Users_Repos, Following, recommendedRepositories, recommendedfollowing
 import csv
 import json
 
@@ -32,7 +32,7 @@ def follow(request):
     return render(request, 'recommender/follow.html')
 
 def recommendedRepos(request, name):
-    reposobj=recommendedrepossimilarity.objects.filter(user=name)
+    reposobj=recommendedRepositories.objects.filter(user=name)
     return render(request, 'recommender/recommendedRepos.html', {'repos':reposobj})
 
 def recommendedFollowers(request, name):
@@ -136,15 +136,40 @@ def reposSimilarity():
     for line in lines:
         repos = line.split()
         user = repos[0]
-        repos = repos[1:]
+        repos=repos[1:]
         for i in repos:
-            x = i.split('/')
-            if(len(x) == 2): 
-                check=recommendedrepossimilarity.objects.filter(user=user, reponame=x[1])
-                if(len(check)>0):
-                    continue
-                a = recommendedrepossimilarity(user = user, reponame=x[1],similaruser=x[0])
-                a.save()
+            x=i.split('/')
+            check=recommendedRepositories.objects.filter(user=user, reponame=x[1])
+            if(len(check)>0):
+                continue
+            a = recommendedRepositories(user = user, reponame=x[1],similaruser=x[0], repotype='-')
+            a.save()
+
+def reposFollowing():
+    f=open('/home/captain/GRS/Recommended-repos.txt', 'r')
+    lines= f.read().splitlines()
+    for line in lines:
+        repos = line.split()
+        user = repos[0]
+        if(len(repos)<2):
+            continue
+        candidate=repos[1]
+        repos = repos[2:]
+        for i in repos:
+            ch=len(i)-1
+            a1=''
+            a2=''
+            while(i[ch]!='-'):
+                a1+=i[ch]
+                ch-=1
+            for r in range(len(a1)-1, -1, -1):
+                a2+=a1[r]
+            a1=i[:ch]
+            check=recommendedRepositories.objects.filter(user=user, reponame=a1)
+            if(len(check)>0):
+                continue
+            a = recommendedRepositories(user = user, reponame=a1,similaruser=candidate, repotype=a2)
+            a.save()
     
 def followingSimilarity():
     f=open('/home/captain/GRS/followersrecommended.txt', 'r')
