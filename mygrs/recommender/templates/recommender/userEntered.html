@@ -12,8 +12,20 @@
 {% block content %}
 
 <div id="chartContainer" style="height: 570px; width: 100%; background-color: #000 important;"></div>
+<div class="recommend d-flex justify-content-center">
+    <button type="button" onclick="repo()" class="repo btn btn-primary btn-lg">Get Repos</button>
+    <button type="button" onclick = "followee()" class="followee btn btn-secondary btn-lg">Find Friends</button>
+
+</div>
 <script>
     var datax=JSON.parse("{{userdata|escapejs}}");
+    var user = "{{name}}";
+    function repo(){
+        window.location.pathname = '/recommendedrepos/' + user;
+    };
+    function followee(){
+        window.location.pathname = '/recommendedfollowers/' + user;
+    };
     if(datax!="Error"){
 
         dps=[];

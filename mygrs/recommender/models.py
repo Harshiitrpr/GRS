@@ -57,7 +57,7 @@ class Following(models.Model):
     def __str__(self):
         return str(self.githubuser)
 
-class recommendedreposSimilarity(models.Model):
+class recommendedrepossimilarity(models.Model):
     user = models.CharField(max_length=100)
     reponame = models.CharField(max_length=100)
     similaruser = models.CharField(max_length=100)
@@ -68,7 +68,7 @@ class recommendedreposSimilarity(models.Model):
     def __str__(self):
         return str(self.user)
 
-class recommendedreposFollowing(models.Model):
+class recommendedreposfollowing(models.Model):
     user = models.CharField(max_length=100)
     reponame = models.CharField(max_length=100)
     similaruser = models.CharField(max_length=100)
@@ -76,6 +76,18 @@ class recommendedreposFollowing(models.Model):
 
     class Meta:
         verbose_name_plural = 'ReposBasedonFollowing'
+    
+    def __str__(self):
+        return str(self.user)
+
+class recommendedfollowing(models.Model):
+    user = models.CharField(max_length=100)
+    followee = models.CharField(max_length=100)
+    source = models.CharField(max_length=100)
+    similar = models.FloatField()
+
+    class Meta:
+        verbose_name_plural = 'FollowingRecommend'
     
     def __str__(self):
         return str(self.user)
