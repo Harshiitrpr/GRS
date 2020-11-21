@@ -43,6 +43,10 @@ with open("userRepoTypeInfo.txt") as fg:
     user_repo_pasand = fg.read().splitlines() 
 
 for counter in range(len(lines)):
+    if counter < 600:
+        continue
+    elif counter > 1200:
+        break
     users = lines[counter]
     followings = users.split()
     user = followings[0]
