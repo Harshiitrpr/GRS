@@ -47,7 +47,7 @@ for counter in range(600):
     users = lines[counter]
     followings = users.split()
     user = followings[0]
-    if(user == 'jpienaar'):
+    if(user == 'ZYSzys'):
         check=1
     if(check == 0):
         continue
