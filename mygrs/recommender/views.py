@@ -1,25 +1,17 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from .models import GithubUsers, Languages, User_Repo_Type_Contribution, RepoTypes, Users_Repos, Following
+from django.shortcuts import render, redirect
+from .models import GithubUsers, Languages, User_Repo_Type_Contribution, RepoTypes, Users_Repos, Following, recommendedreposfollowing, recommendedrepossimilarity, recommendedfollowing
 import csv
 import json
 
 def home(request):
+    if(request.method == 'POST'):
+        username = request.POST.get('username')
+        return redirect('entered-user', username)
     return render(request, 'recommender/home.html')
 
 def about(request):
     return render(request, 'recommender/about.html')
-
-<<<<<<< HEAD
-def userEntered(request):
-    print(User_Repo_Type_Contribution)
-    return render(request, 'recommender/userEntered.html')
-=======
-def recommendedRepos(request):
-    return render(request, 'recommender/recommendedRepos.html')
-
-def recommendedFollowers(request):
-    return render(request, 'recommender/recommendedFollowers.html')
 
 def userEntered(request, name):
     repos=User_Repo_Type_Contribution.objects.filter(username=name)
@@ -34,11 +26,18 @@ def userEntered(request, name):
         file_sent=json.dumps(file_sent)
     else:
         file_sent='Error'
-    return render(request, 'recommender/userEntered.html', {'userdata':file_sent})
->>>>>>> b26fe18211a20211e75cdb018ca25cb4a7f1a8a3
+    return render(request, 'recommender/userEntered.html', {'userdata':file_sent, 'name' : name})
 
 def follow(request):
     return render(request, 'recommender/follow.html')
+
+def recommendedRepos(request, name):
+    reposobj=recommendedrepossimilarity.objects.filter(user=name)
+    return render(request, 'recommender/recommendedRepos.html', {'repos':reposobj})
+
+def recommendedFollowers(request, name):
+    recommendFollowee=recommendedfollowing.objects.filter(user=name)
+    return render(request, 'recommender/recommendedFollowers.html', {'followee' : recommendFollowee})
 
 
 # For database entries
@@ -130,3 +129,43 @@ def FollowingEntries():
                 continue
             a=Following(githubuser=user, followee=users[i])
             a.save()
+
+def reposSimilarity():
+    f=open('/home/captain/GRS/reposBasedOnSimilarity.txt', 'r')
+    lines= f.read().splitlines()
+    for line in lines:
+        repos = line.split()
+        user = repos[0]
+        repos = repos[1:]
+        for i in repos:
+            x = i.split('/')
+            if(len(x) == 2): 
+                check=recommendedrepossimilarity.objects.filter(user=user, reponame=x[1])
+                if(len(check)>0):
+                    continue
+                a = recommendedrepossimilarity(user = user, reponame=x[1],similaruser=x[0])
+                a.save()
+    
+def followingSimilarity():
+    f=open('/home/captain/GRS/followersrecommended.txt', 'r')
+    lines= f.read().splitlines()
+    for line in lines:
+        repos = line.split()
+        user = repos[0]
+        repos = repos[1:]
+        for i in repos:
+            x = i.split('/')
+            if(len(x) == 2): 
+                check=recommendedfollowing.objects.filter(user=user, followee=x[1])
+                if(len(check)>0):
+                    continue
+                a = recommendedfollowing(user = user, similar=0.0, followee=x[1], source=x[0])
+                a.save()
+            elif(len(x) == 3): 
+                if(x[0]!='similar'):
+                    continue
+                check=recommendedfollowing.objects.filter(user=user, followee=x[1])
+                if(len(check)>0):
+                    continue
+                a = recommendedfollowing(user = user, similar=float(x[2]), followee=x[1], source='none')
+                a.save()

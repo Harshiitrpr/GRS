@@ -4,6 +4,7 @@ body {
     color: hsla(0,0%,100%,.6);
     background-position: center 10%;
     background-size: cover;
+    font-family: 'Mulish', sans-serif;
 }
 
 nav a {
@@ -24,7 +25,7 @@ div.home div.card {
     margin: 5%;
     width: 23vw !important;
     height: 30vh;
-    font-size: 3vh;
+    font-size: 4vh;
 }
 
 div.home div.card input {
@@ -40,8 +41,29 @@ div.home div.card button {
     color: white;
 }
 
+.card-title{
+    font-weight : 600;
+}
 div.userSearch {
     color: black;
+    text-decoration: bold !important;
+    padding-top:14px !important;
 }
 
+.formuser{
+    margin-top : 20px;
+}
+
+.btn-lg{
+    margin-top: 35px !important;
+    font-weight: 600;
+    font-size:23px;
+    letter-spacing: 2px;
+}
+
+.inputname{
+    padding:10px;
+    font-size : 24px !important;
+    font-weight: 500;
+}
 /* #24292e */

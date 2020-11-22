@@ -16,9 +16,10 @@
     <div class="card userSearch" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">Enter Your Username:</h5>
-            <form action="/userEntered" method="GET">
-                <input type="text">
-                <button type="submit" class="btn btn-success btn-lg btn-block">Search</button>
+            <form action="{% url 'recommender-home' %}" method = "POST" class="formuser">
+                {% csrf_token %}
+                <input type="text" name = 'username' class='inputname'>
+                <button type="submit" class="btn btn-success btn-lg btn-block">Find me</button>
             </form>
         </div>
     </div>

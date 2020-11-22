@@ -13,17 +13,22 @@
 {% block content %}
 
 <h1 class="heading">Followers Recommended</h1>
-
+{% for i in followee %}
 <div class="card">
     <div class="card-header">
-        Quote
+        {{i.followee}}
     </div>
     <div class="card-body">
         <blockquote class="blockquote mb-0">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            {% if i.source == 'none' %}
+            <p>Based on similarity index of {{i.similar}}</p>
+            {% else %}
+            <p>Based on following of {{i.source}}</p>
+            {% endif %}
         </blockquote>
     </div>
 </div>
+{% endfor %}
 
 
 {% endblock content %}
