@@ -12,17 +12,54 @@ a {
 }
 
 h1.heading {
-    font-family: 'Alatsi', sans-serif;
+    font-family: 'Mulish', sans-serif;
     text-align: center;
     padding-top: 1%;
     padding-right: 1%;
     padding-left: 1%;
+    font-weight: 600;
 }
 
-.card {
+.card1 {
     margin-right: 1%;
     margin-left: 1%;
     margin-top: 1%;
+    width:30%;
+    flex:0 48%;
+    box-sizing: border-box;
+}
+
+.card2 {
+    margin-right: 1%;
+    margin-left: 1%;
+    margin-top: 1%;
+    width:30%;
+    flex:0 30%;
+    box-sizing: border-box;
+}
+
+.btn-successs{
+    font-weight: 600;
+    font-size: 19px !important;
+    letter-spacing:1px;
+}
+
+.btn-primarys{
+    background-color: #007bff;
+}
+.card-header{
+    font-size: 28px;
+    font-weight:800;
+}
+
+.card-title{
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.reponame{
+    font-weight: 600;
+    font-size:18px;
 }
 
 #chartContainer{
@@ -40,4 +77,9 @@ h1.heading {
     font-size:24px;
     font-weight: 600;
     letter-spacing:1px;
+}
+
+.accumulate{
+    display: flex;
+    flex-wrap:wrap;
 }

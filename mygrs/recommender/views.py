@@ -1,10 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import GithubUsers, Languages, User_Repo_Type_Contribution, RepoTypes, Users_Repos, Following, recommendedRepositories, recommendedfollowing
+from .models import GithubUsers, Languages, User_Repo_Type_Contribution, RepoTypes, Users_Repos, Following, recommendedReposSimilarity, recommendedfollowing
 import csv
 import json
 
 def home(request):
+    # reposSimilarity()
     if(request.method == 'POST'):
         username = request.POST.get('username')
         return redirect('entered-user', username)
@@ -32,7 +33,7 @@ def follow(request):
     return render(request, 'recommender/follow.html')
 
 def recommendedRepos(request, name):
-    reposobj=recommendedRepositories.objects.filter(user=name)
+    reposobj=recommendedReposSimilarity.objects.filter(user=name)
     return render(request, 'recommender/recommendedRepos.html', {'repos':reposobj})
 
 def recommendedFollowers(request, name):
@@ -131,7 +132,7 @@ def FollowingEntries():
             a.save()
 
 def reposSimilarity():
-    f=open('/home/captain/GRS/reposBasedOnSimilarity.txt', 'r')
+    f=open('/home/captain/GRS/reposBasedOnSimilarity1.txt', 'r')
     lines= f.read().splitlines()
     for line in lines:
         repos = line.split()
@@ -139,10 +140,18 @@ def reposSimilarity():
         repos=repos[1:]
         for i in repos:
             x=i.split('/')
-            check=recommendedRepositories.objects.filter(user=user, reponame=x[1])
+            check=recommendedReposSimilarity.objects.filter(user=user, reponame=x[1])
             if(len(check)>0):
                 continue
-            a = recommendedRepositories(user = user, reponame=x[1],similaruser=x[0], repotype='-')
+            try:
+                find = RepoTypes.objects.get(reponame=x[1])
+            except:
+                continue
+            try:
+                lang=Languages.objects.get(associated_number=find.repotype1)
+            except:
+                continue
+            a = recommendedReposSimilarity(user = user, reponame=x[1],similaruser=x[0], repotype=lang, similarity=x[2])
             a.save()
 
 def reposFollowing():
@@ -165,10 +174,10 @@ def reposFollowing():
             for r in range(len(a1)-1, -1, -1):
                 a2+=a1[r]
             a1=i[:ch]
-            check=recommendedRepositories.objects.filter(user=user, reponame=a1)
+            check=recommendedReposSimilarity.objects.filter(user=user, reponame=a1)
             if(len(check)>0):
                 continue
-            a = recommendedRepositories(user = user, reponame=a1,similaruser=candidate, repotype=a2)
+            a = recommendedReposSimilarity(user = user, reponame=a1,similaruser=candidate, repotype=a2)
             a.save()
     
 def followingSimilarity():

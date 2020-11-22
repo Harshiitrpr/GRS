@@ -12,23 +12,53 @@
 
 {% block content %}
 
-<h1 class="heading">Followers Recommended</h1>
+<h1 class="heading">Github Users you can follow</h1>
+<div class="accumulate">
 {% for i in followee %}
-<div class="card">
+<div class="card card2">
     <div class="card-header">
         {{i.followee}}
     </div>
     <div class="card-body">
-        <blockquote class="blockquote mb-0">
-            {% if i.source == 'none' %}
-            <p>Based on similarity index of {{i.similar}}</p>
-            {% else %}
-            <p>Based on following of {{i.source}}</p>
-            {% endif %}
-        </blockquote>
-    </div>
+        {% if i.source == 'none' %}
+        <h5 class="card-title hi">Basis : Similarity Index</h5>
+        {% else %}
+        <h5 class="card-title hi">Basis : {{i.source}}</h5>
+        {% endif %}
+        {% if i.source == 'none' %}
+        <p class="card-text">This recommendation is based on the similarity index of {{i.similar}}.</p>
+        {% else %}
+        <p class="card-text">{{i.source}} the person whom you follow follows this github user.<br> Also there is a high degree of similarity between both of your interests.</p>
+        {% endif %}
+    
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-success btn-successs">Visit User</button>
+            <button type="button" class="btn btn-primary btn-primarys" data-container="body" data-toggle="popover" data-placement="left" data-content="Similarity Index is a measure of how much your interests match with any other Github User. It is calculated on the basis of your repositories types, your following and your history on Github.">
+                More Info
+            </button>
+        </div>
+    </div>  
 </div>
 {% endfor %}
+<div style="height:40px; width:100%;"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $('.btn-successs').click(function(){
+        var x = $(this).closest('.card');
+        var reponame = $($($(this).parent()).parent()).siblings('.card-header').text();
+        reponame=String(reponame);
+        reponame=reponame.trim();
+        console.log(reponame);
+        var link = 'https://github.com/'+reponame;
+        window.location=link;
+    });
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
 
 
 {% endblock content %}

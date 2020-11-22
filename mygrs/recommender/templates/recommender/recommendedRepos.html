@@ -7,28 +7,50 @@
 <link rel="stylesheet" href="{% static 'recommender/rest.css' %}">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Alatsi&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 {% endblock head %}
 
 {% block content %}
 
-<h1 class="heading">Repositories Recommended</h1>
-
+<h1 class="heading">Repositories for You</h1>
+<div class="accumulate">
 {% for i in repos %}
-<div class="card">
+<div class="card card1">
     <div class="card-header">
         {{i.reponame}}
     </div>
     <div class="card-body">
-        <blockquote class="blockquote mb-0">
-            <p>{{i.similaruser}}</p>
-        </blockquote>
-    </div>
+        <h5 class="card-title hi">{{i.similaruser}}</h5>
+        <p class="card-text">This repository belongs to {{i.similaruser}}.<br> Common Language interests : <span class="reponame">{{i.repotype.lang_name}}</span> <br> Degree of similarity : {{i.similarity}}</p>
+    
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-success btn-successs">Visit Repo</button>
+            <button type="button" class="btn btn-primary btn-primarys" data-container="body" data-toggle="popover" data-placement="left" data-content="Similarity Index is a measure of how much your interests match with any other Github User. It is calculated on the basis of your repositories types, your following and your history on Github.">
+                More Info
+            </button>
+        </div>
+    </div>  
 </div>
 {% endfor %}
-
+<div style="height:40px; width:100%;"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
-
+    $('.btn-successs').click(function(){
+        var x = $(this).closest('.card');
+        var reponame = $($($(this).parent()).parent()).siblings('.card-header').text();
+        reponame=String(reponame);
+        reponame=reponame.trim();
+        var userx = $($($(this).parent()).parent()).children('.card-title').text();
+        var link = 'https://github.com/'+userx+'/'+reponame;
+        window.location=link;
+    });
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
 </script>
 
 {% endblock content %}
