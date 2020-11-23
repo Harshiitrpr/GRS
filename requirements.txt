@@ -1,0 +1,7 @@
+selenium>=3.141.0
+matplotlib>=3.3.2
+numpy>=1.19.1
+networkx>=2.5
+re>=2.2.1
+csv>=1.0
+Django==3.0
