@@ -30,7 +30,7 @@ for i in lines:
         tokenise[x[0] + ' ' + x[1] + ' ' + x[2]] = int(x[3])
         token = int(x[3])
 # PATH = "chromedriver.exe"
-PATH = "/home/captain/GRS/chromedriver"
+PATH = "chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 driver.implicitly_wait(1)
 driver.minimize_window()
@@ -42,15 +42,11 @@ with open("userFollowingData.txt") as f:
 with open("userRepoTypeInfo.txt") as fg:
     user_repo_pasand = fg.read().splitlines() 
 
-check = 0
-for counter in range(600):
+for counter in range(600, 1201):
+    print(counter)
     users = lines[counter]
     followings = users.split()
     user = followings[0]
-    if(user == 'ZYSzys'):
-        check=1
-    if(check == 0):
-        continue
     following = followings[1:]
     userRepoType = []
     user_pasand = user_repo_pasand[counter].split(' ')
@@ -68,7 +64,6 @@ for counter in range(600):
             break
         recommendationx.write(user + ' ' + candidate)
         path = "https://github.com/"+candidate+"?tab=repositories"
-        driver.minimize_window()
         driver.implicitly_wait(1)
         driver.get(path)
         try:
